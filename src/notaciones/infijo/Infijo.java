@@ -21,31 +21,35 @@ public class Infijo {
 
 			case OPERATION:
 			case LOGIC_OPERATION:
+			case BOOLEAN_LOGIC_OPERATION:
 				if (!stackOperations.isEmpty()) {
+					int hierachyActualElement = InfijoHelper
+							.getHierachy(element);
 					String lastElementInStack = stackOperations.peek();
 					int hierachyLastElementInStack = InfijoHelper
 							.getHierachy(lastElementInStack);
-					int hierachyActualElement = InfijoHelper
-							.getHierachy(element);
-					if (hierachyActualElement > hierachyLastElementInStack) {
-						listOut.add(element);
-					} else {
-						stackOperations.push(element);
+					while (hierachyActualElement < hierachyLastElementInStack) {
+						listOut.add(stackOperations.pop());
+						if (!stackOperations.empty()) {
+							lastElementInStack = stackOperations.peek();
+							hierachyLastElementInStack = InfijoHelper
+									.getHierachy(lastElementInStack);
+						} else {
+							break;
+						}
 					}
-				} else {
-					stackOperations.push(element);
 				}
+				stackOperations.push(element);
 				break;
 
 			case OPEN_PARENTHESIS:
-				List<String> sublistIn = InfijoHelper.getSubList(listIn,
-						element);
+				List<String> sublistIn = InfijoHelper.getSubList(listIn, i);
 				List<String> sublistOut = calcular(sublistIn);
 				listOut.addAll(sublistOut);
 				i = i + sublistOut.size();
 				break;
 			case OTHER:
-				throw new Exception("This is not allowed");
+ 
 
 			default:
 				break;

@@ -31,9 +31,9 @@ public class InfijoHelperTest {
 		assertEquals(InfijoHelper.getElementType("#"),
 				InfijoHelper.TYPE.LOGIC_OPERATION);
 		assertEquals(InfijoHelper.getElementType("&"),
-				InfijoHelper.TYPE.LOGIC_OPERATION);
+				InfijoHelper.TYPE.BOOLEAN_LOGIC_OPERATION);
 		assertEquals(InfijoHelper.getElementType("|"),
-				InfijoHelper.TYPE.LOGIC_OPERATION);
+				InfijoHelper.TYPE.BOOLEAN_LOGIC_OPERATION);
 		assertEquals(InfijoHelper.getElementType("<"),
 				InfijoHelper.TYPE.LOGIC_OPERATION);
 		assertEquals(InfijoHelper.getElementType("?"),
@@ -169,7 +169,7 @@ public class InfijoHelperTest {
 				"2", "+", "2", ")" });
 		List<String> listOut = InfijoTest
 				.listWith(new String[] { "2", "+", "2" });
-		assertEquals(InfijoHelper.getSubList(listIn, listIn.get(2)), listOut);
+		assertEquals(InfijoHelper.getSubList(listIn, 2), listOut);
 	}
 
 }

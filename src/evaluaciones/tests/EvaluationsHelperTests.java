@@ -50,22 +50,22 @@ public class EvaluationsHelperTests {
 
 	@Test
 	public void testEvaluateLogicOperation() throws Exception {
-		double lastNumber = 3;
-		double preLastNumber = 2;
+		String lastNumber = "3";
+		String preLastNumber = "2";
 		LOGIC_OPERATION logicOperation = LOGIC_OPERATION.GREATER;
+		assertEquals(false, EvaluationsHelper.evaluateLogicOperation(
+				lastNumber, preLastNumber, logicOperation));
+
+		lastNumber = "3";
+		preLastNumber = "2";
+		logicOperation = LOGIC_OPERATION.LESS;
 		assertEquals(true, EvaluationsHelper.evaluateLogicOperation(lastNumber,
 				preLastNumber, logicOperation));
 
-		lastNumber = 3;
-		preLastNumber = 2;
+		lastNumber = "2";
+		preLastNumber = "3";
 		logicOperation = LOGIC_OPERATION.LESS;
 		assertEquals(false, EvaluationsHelper.evaluateLogicOperation(
-				lastNumber, preLastNumber, logicOperation));
-		
-		lastNumber = 2;
-		preLastNumber = 3;
-		logicOperation = LOGIC_OPERATION.LESS;
-		assertEquals(true, EvaluationsHelper.evaluateLogicOperation(
 				lastNumber, preLastNumber, logicOperation));
 	}
 
@@ -75,7 +75,7 @@ public class EvaluationsHelperTests {
 				"2" });
 		Stack<String> logicOperatorsStack = InfijoTest
 				.stackWith(new String[] { "<" });
-		boolean expectedResult = true;
+		boolean expectedResult = false;
 		assertEquals(expectedResult, EvaluationsHelper.evaluateLogicOperations(
 				numbersStack, logicOperatorsStack));
 	}

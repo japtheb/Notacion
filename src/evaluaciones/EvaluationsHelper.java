@@ -40,8 +40,8 @@ public class EvaluationsHelper {
 			if (numbersStack.size() < 2) {
 				throw new Exception("malformed evaluation");
 			}
-			double lastNumber = Double.parseDouble(numbersStack.pop());
-			double preLastNumber = Double.parseDouble(numbersStack.pop());
+			String lastNumber = numbersStack.pop();
+			String preLastNumber = numbersStack.pop();
 			LOGIC_OPERATION logicOperation = InfijoHelper
 					.getLogicOperationType(logicOperatorsStack.pop());
 			return EvaluationsHelper.evaluateLogicOperation(lastNumber,
@@ -51,27 +51,31 @@ public class EvaluationsHelper {
 		throw new Exception("malformed evaluation");
 	}
 
-	public static boolean evaluateLogicOperation(double lastNumber,
-			double preLastNumber, LOGIC_OPERATION logicOperation)
+	public static boolean evaluateLogicOperation(String lastElement,
+			String preLastElement, LOGIC_OPERATION logicOperation)
 			throws Exception {
+
+		double lastNumber = Double.parseDouble(lastElement);
+		double preLastNumber = Double.parseDouble(preLastElement);
+
 		switch (logicOperation) {
 		case EQUALS:
-			return lastNumber == preLastNumber;
+			return preLastNumber == lastNumber;
 
 		case DIFFERENT:
-			return lastNumber != preLastNumber;
+			return preLastNumber != lastNumber;
 
 		case LESS:
-			return lastNumber < preLastNumber;
+			return preLastNumber < lastNumber;
 
 		case LESS_OR_EQUALS:
-			return lastNumber <= preLastNumber;
+			return preLastNumber <= lastNumber;
 
 		case GREATER:
-			return lastNumber > preLastNumber;
+			return preLastNumber > lastNumber;
 
 		case GREATER_OR_EQUALS:
-			return lastNumber >= preLastNumber;
+			return preLastNumber >= lastNumber;
 
 		case AND:
 		case OR:

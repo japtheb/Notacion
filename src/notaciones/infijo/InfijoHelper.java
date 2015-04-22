@@ -24,7 +24,7 @@ public class InfijoHelper {
 	}
 
 	public enum TYPE {
-		NUMBER, OPERATION, OPEN_PARENTHESIS, CLOSE_PARENTHESIS, OTHER, LOGIC_OPERATION
+		NUMBER, OPERATION, OPEN_PARENTHESIS, CLOSE_PARENTHESIS, OTHER, LOGIC_OPERATION, BOOLEAN_LOGIC_OPERATION
 	}
 
 	public enum OPERATION {
@@ -35,10 +35,9 @@ public class InfijoHelper {
 		AND, OR, LESS, LESS_OR_EQUALS, GREATER, GREATER_OR_EQUALS, EQUALS, DIFFERENT
 	}
 
-	public static List<String> getSubList(List<String> listIn, String element)
+	public static List<String> getSubList(List<String> listIn, int startIndex)
 			throws Exception {
 		List<String> listOut = new ArrayList<String>();
-		int startIndex = listIn.indexOf(element);
 		for (int i = startIndex; i < listIn.size(); i++) {
 			String actualElement = listIn.get(i);
 			TYPE actualElementType = getElementType(actualElement);
@@ -96,12 +95,24 @@ public class InfijoHelper {
 			return TYPE.OPERATION;
 		} else if (isLogicOperation(element)) {
 			return TYPE.LOGIC_OPERATION;
+		} else if (isBooleanLogicOperation(element)) {
+			return TYPE.BOOLEAN_LOGIC_OPERATION;
 		} else if (isOpenParenthesis(element)) {
 			return TYPE.OPEN_PARENTHESIS;
 		} else if (isCloseParenthesis(element)) {
 			return TYPE.CLOSE_PARENTHESIS;
 		} else {
 			return TYPE.OTHER;
+		}
+	}
+
+	public static boolean isBooleanLogicOperation(String element) {
+		if (element.equals("&")) {
+			return true;
+		} else if (element.equals("|")) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -139,10 +150,6 @@ public class InfijoHelper {
 
 	public static boolean isLogicOperation(String element) {
 		if (element.equals("#")) {
-			return true;
-		} else if (element.equals("&")) {
-			return true;
-		} else if (element.equals("|")) {
 			return true;
 		} else if (element.equals("<")) {
 			return true;

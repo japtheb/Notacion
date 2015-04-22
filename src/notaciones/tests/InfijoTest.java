@@ -39,12 +39,21 @@ public class InfijoTest {
 		assertEquals(Infijo.calcular(listIn), listResult);
 
 		listIn = listWith(new String[] { "2", "+", "3", "À", "5" });
-		listResult = listWith(new String[] { "2", "3", "5", "À", "+" });
+		listResult = listWith(new String[] { "2", "3", "+", "5", "À" });
 		assertEquals(Infijo.calcular(listIn), listResult);
 
 		listIn = listWith(new String[] { "5", "?", "3", "+", "5" });
-		listResult = listWith(new String[] { "5", "3", "+", "5", "?" });
+		listResult = listWith(new String[] { "5", "3", "5", "+", "?" });
 		assertEquals(Infijo.calcular(listIn), listResult);
+		
+		listIn = listWith(new String[] { "(", "20", "-", "7", "%", "2", ">", "7", "-", "5", ")" });
+		listResult = listWith(new String[] { "20", "7", "2", "%", "-", "7", "5", "-", ">" });
+		assertEquals(Infijo.calcular(listIn), listResult);
+		
+		listIn = listWith(new String[] { "(", "3", "+", "5", "<", "2", "+", "3", ")", "&", "(", "20", "-", "7", "%", "2", ">", "7", "-", "5", ")" });
+		listResult = listWith(new String[] { "3", "5", "+", "2", "3", "+", "<", "20", "7", "2", "%", "-", "7", "5", "-", ">", "&" });
+		assertEquals(Infijo.calcular(listIn), listResult);
+		
 	}
 
 	@Rule

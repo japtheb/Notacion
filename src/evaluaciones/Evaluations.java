@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Stack;
 
 import notaciones.infijo.InfijoHelper;
+import notaciones.infijo.InfijoHelper.LOGIC_OPERATION;
 import notaciones.infijo.InfijoHelper.OPERATION;
 import notaciones.infijo.InfijoHelper.TYPE;
 
@@ -11,7 +12,7 @@ public class Evaluations {
 
 	public static boolean evaluate(List<String> listIn) throws Exception {
 		Stack<String> numbersStack = new Stack<String>();
-		Stack<String> logicOperatorsStack = new Stack<String>();
+		Stack<Boolean> logicOperatorsStack = new Stack<Boolean>();
 		for (String element : listIn) {
 			TYPE elementType = InfijoHelper.getElementType(element);
 			switch (elementType) {
@@ -31,14 +32,24 @@ public class Evaluations {
 				numbersStack.push(resultOperation);
 				break;
 			case LOGIC_OPERATION:
-				logicOperatorsStack.push(element);
+				if (numbersStack.size() < 2) {
+					throw new Exception("Malfermed evaluation");
+				}
+				lastElement = numbersStack.pop();
+				preLastElement = numbersStack.pop();
+				LOGIC_OPERATION logicOperation = InfijoHelper
+						.getLogicOperationType(element);
+				boolean resultLogicOperation = EvaluationsHelper
+						.evaluateLogicOperation(lastElement, preLastElement,
+								logicOperation);
+				logicOperatorsStack.push(resultLogicOperation);
 				break;
 			default:
 				break;
 			}
 		}
-		return EvaluationsHelper.evaluateLogicOperations(numbersStack,
-				logicOperatorsStack);
+
+		return logicOperatorsStack.pop();
 	}
 
 }
