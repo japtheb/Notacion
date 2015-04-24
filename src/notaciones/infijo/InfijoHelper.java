@@ -21,6 +21,7 @@ public class InfijoHelper {
 		public static final int MODULE_HIERACHY = 2;
 		public static final int AND_HIERACHY = 4;
 		public static final int OR_HIERACHY = 3;
+		
 	}
 
 	public enum TYPE {

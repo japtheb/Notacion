@@ -50,7 +50,7 @@ public class EvaluationsHelper {
 		}
 		throw new Exception("malformed evaluation");
 	}
-
+		
 	public static boolean evaluateLogicOperation(String lastElement,
 			String preLastElement, LOGIC_OPERATION logicOperation)
 			throws Exception {
@@ -84,5 +84,52 @@ public class EvaluationsHelper {
 		default:
 			throw new Exception("not a valid logic operation");
 		}
+		
 	}
+	public static String evaluateOperations(Stack<String> numbersStack,
+			Stack<String> OperatorsStack) throws Exception {
+		while (!OperatorsStack.isEmpty()) {
+			if (numbersStack.size() < 2) {
+				throw new Exception("malformed evaluation");
+			}
+			String lastNumber = numbersStack.pop();
+			String preLastNumber = numbersStack.pop();
+			OPERATION Operation = InfijoHelper
+					.getOperationType(OperatorsStack.pop());
+			return EvaluationsHelper.evaluateOperation(lastNumber,
+					preLastNumber,Operation);
+
+		}
+		throw new Exception("malformed evaluation");
+	}
+	public static double evaluateOperation1(String lastElement,
+			String preLastElement, OPERATION Operation)
+			throws Exception {
+
+		double lastNumber = Double.parseDouble(lastElement);
+		double preLastNumber = Double.parseDouble(preLastElement);
+
+		switch (Operation) {
+		case MULTUPLY:
+			return preLastNumber * lastNumber;
+
+		case PLUS:
+			return preLastNumber + lastNumber;
+
+		case MINUS:
+			return preLastNumber - lastNumber;
+
+		case DIVIDE:
+			return preLastNumber / lastNumber;
+
+		case MODULE:
+			return preLastNumber % lastNumber;
+
+		default:
+			throw new Exception("not a valid logic operation");
+		}
+		
+	}
+
+
 }

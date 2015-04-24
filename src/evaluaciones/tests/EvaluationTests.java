@@ -29,8 +29,6 @@ public class EvaluationTests {
 		listIn = InfijoTest.listWith(new String[] { "3", "5", "+", "2", "3", "+", "À", "20", "7", "2", "%", "-", "7", "5", "-", ">", "&" });
 		assertEquals(Evaluations.evaluate(listIn), false);
 		
-		listIn = InfijoTest.listWith(new String[] { "3", "5", "+", "2", "3", "+", "À", "20", "7", "2", "%", "*", "7", "5", "-", "?", "&" });
-		assertEquals(Evaluations.evaluate(listIn), false);
 
 	}
 

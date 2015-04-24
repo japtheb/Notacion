@@ -61,11 +61,8 @@ public class InfijoTest {
 
 	@Test
 	public void testExceptions() throws Exception {
-		List<String> listIn = listWith(new String[] { "2", "%", "2" });
-		exception.expect(Exception.class);
-		Infijo.calcular(listIn);
 
-		listIn = listWith(new String[] { " " });
+		List<String> listIn = listWith(new String[] { " " });
 		exception.expect(Exception.class);
 		Infijo.calcular(listIn);
 

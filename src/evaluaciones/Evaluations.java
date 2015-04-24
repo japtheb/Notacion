@@ -1,5 +1,6 @@
 package evaluaciones;
 
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -10,7 +11,7 @@ import notaciones.infijo.InfijoHelper.TYPE;
 
 public class Evaluations {
 
-	public static boolean evaluate(List<String> listIn) throws Exception {
+	public static String evaluate(List<String> listIn) throws Exception {
 		Stack<String> numbersStack = new Stack<String>();
 		Stack<Boolean> logicOperatorsStack = new Stack<Boolean>();
 		for (String element : listIn) {
@@ -48,8 +49,12 @@ public class Evaluations {
 				break;
 			}
 		}
+		if (logicOperatorsStack.isEmpty()) {
+			return numbersStack.pop();
+		} else {
+			return String.valueOf(logicOperatorsStack.pop());
+		}
 
-		return logicOperatorsStack.pop();
 	}
 
 }

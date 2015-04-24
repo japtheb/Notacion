@@ -15,7 +15,7 @@ public class Main {
 						.split("(?<=[-+x/<>=#?À&|%\\(\\) ])|(?=[-+x/<>=#?À&|%\\(\\)])"));
 		List<String> resultInfijo = Infijo.calcular(listIn.subList(1,
 				listIn.size()));
-		boolean resultEvaluation = Evaluations.evaluate(resultInfijo);
+		String resultEvaluation = Evaluations.evaluate(resultInfijo);
 		JOptionPane
 				.showMessageDialog(
 						null,
